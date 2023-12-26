@@ -1,5 +1,6 @@
 const { v4: uuidv4 } = require("uuid");
 const User = require("../models/user");
+const { setUser } = require("../service/auth");
 //const { setUser } = require("../service/auth");
 
 
@@ -14,7 +15,7 @@ async function handleUserSignup(req, res) {
         email,
         password,
       });
-  console.log("llllllll",newUser);
+     console.log("llllllll",newUser);
       // Instead of redirecting, send a JSON response with the newly created user data
       return res.status(201).json({
         message: "User created successfully",
@@ -37,17 +38,26 @@ async function handleUserSignup(req, res) {
 
 async function handleUserLogin(req, res) {
   const { email, password } = req.body;
-  const user = await User.findOne({ email, password });
+  const user = await User.findOne({ email, password });//find user
 
   if (!user)
     return res.render("login", {
       error: "Invalid Username or Password",
     });
+    
+    const token=setUser(user);
+    res.cookie("uid",token);
 
-  const sessionId = uuidv4();
-  setUser(sessionId, user);
-  res.cookie("uid", sessionId);
-  return res.redirect("/");
+  return res.status(200).json({
+    message: "Login successful",
+    user: {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+    },
+  });
+
+  
 }
 
 module.exports = {

@@ -1,5 +1,6 @@
 const express = require("express");
 const { connectToMongoDB } = require("./connect");
+const { restrictToLoggedinUserOnly, checkAuth } = require("./middlewares/auth");
 const path = require("path");
 const URL = require("./models/url");
 
@@ -17,9 +18,9 @@ connectToMongoDB("mongodb+srv://sejal8974:VmvJAh6Efa8nyVWy@cluster0.arbfpo8.mong
 
 app.use(express.json());//middleware
 
-app.use("/url", urlRoute);
+app.use("/url", restrictToLoggedinUserOnly, urlRoute);   //only logged in user can access this
 app.use("/user", userRoute);
-app.use("/",  staticRoute);
+app.use("/", checkAuth, staticRoute)
 
 //paste the short id here
 app.get("/:shortId", async (req, res) => {

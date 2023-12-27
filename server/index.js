@@ -3,7 +3,7 @@ const { connectToMongoDB } = require("./connect");
 const { restrictToLoggedinUserOnly, checkAuth } = require("./middlewares/auth");
 const path = require("path");
 const URL = require("./models/url");
-
+const cors = require('cors');
 
 const urlRoute = require("./routes/url");
 const staticRoute = require("./routes/staticRouter");
@@ -15,10 +15,10 @@ const PORT = 8001;
 connectToMongoDB("mongodb+srv://sejal8974:VmvJAh6Efa8nyVWy@cluster0.arbfpo8.mongodb.net/?retryWrites=true&w=majority").then(() =>
   console.log("Mongodb connected")
 );
-
+app.use(cors());
 app.use(express.json());//middleware
 
-app.use("/url", restrictToLoggedinUserOnly, urlRoute);   //only logged in user can access this
+app.use("/url", urlRoute);   //only logged in user can access this
 app.use("/user", userRoute);
 app.use("/", checkAuth, staticRoute)
 

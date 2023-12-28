@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const handleLogout = () => {
+    // Perform logout logic here
+    setIsAuthenticated(false);
+    // Redirect or perform other actions as needed
+  };
 
   return (
     <div style={styles.container}>
@@ -11,12 +18,21 @@ const Navbar = () => {
       </div>
 
       <div style={styles.buttonContainer}>
-        <button style={styles.navButton} onClick={() => navigate("/Signup")}>
-          Signup
-        </button>
-        <button style={styles.navButton} onClick={() => navigate("/Signin")}>
-          Signin
-        </button>
+        {!isAuthenticated && (
+          <>
+            <button style={styles.navButton} onClick={() => navigate("/signup")}>
+              Signup
+            </button>
+            <button style={styles.navButton} onClick={() => navigate("/signin")}>
+              Signin
+            </button>
+          </>
+        )}
+        {isAuthenticated && (
+          <button style={styles.navButton} onClick={handleLogout}>
+            Logout
+          </button>
+        )}
       </div>
     </div>
   );

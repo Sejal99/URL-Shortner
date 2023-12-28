@@ -68,7 +68,7 @@ const Homescreen = () => {
       
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh',flexDirection:'column' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh',flexDirection:'column' ,  marginTop: '-70px', }}>
    
    <h1 style={{ marginBottom: '-3px' ,color:'purple'}}>Shorten your looooong URLs</h1>
 <h1 style={{ marginTop: '0px',color:'purple' }}>like never before!</h1>

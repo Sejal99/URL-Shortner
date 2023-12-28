@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './Components/Navbar';
 import Homescreen from './Components/Homescreen';
+import Signup from './Components/Signup';
+import Signin from './Components/Signin';
 
 
 const App = () => {
@@ -11,6 +13,8 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/url" element={<Homescreen />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/signin" element={<Signin />} />
         </Routes>
       </Router>
     </div>

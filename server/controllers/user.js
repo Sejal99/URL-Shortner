@@ -5,12 +5,12 @@ const { setUser } = require("../service/auth");
 
 // sign up route
 async function handleUserSignup(req, res) {
-    const { name, email, password } = req.body;
+    const {  email, password } = req.body;
   
     try {
       // Create user
       const newUser = await User.create({
-        name,
+       
         email,
         password,
       });
@@ -46,7 +46,7 @@ async function handleUserLogin(req, res) {
     
     const token=setUser(user);
     res.cookie("uid",token);
-
+console.log('ooooooooooo',token);
   return res.status(200).json({
     message: "Login successful",
     user: {

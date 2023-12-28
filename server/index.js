@@ -18,7 +18,7 @@ connectToMongoDB("mongodb+srv://sejal8974:VmvJAh6Efa8nyVWy@cluster0.arbfpo8.mong
 app.use(cors());
 app.use(express.json());//middleware
 
-app.use("/url", urlRoute);   //only logged in user can access this
+app.use("/url",urlRoute);   //only logged in user can access this
 app.use("/user", userRoute);
 app.use("/", checkAuth, staticRoute)
 

@@ -11,14 +11,7 @@ const Signin = () => {
     console.log(email);
     const [password,setPassword]=useState('')
     console.log(password);
-    useEffect(() => {
-        // Check if the user is already logged in (cookie exists)
-        const storedToken = Cookies.get('uid');
-        if (storedToken) {
-          // Redirect to '/url' if the token exists
-          window.location.href = '/url';
-        }
-      }, []); 
+    
     const handleLogin = async () => {
         try {
             const response = await axios.post('http://localhost:8001/user/login', {
@@ -29,13 +22,17 @@ const Signin = () => {
             if (response.status === 200) {
                 const data = response.data;
                 console.log('Login successful:', data.user);
-                if (data.token != null) {
+               
                     // Save the token to a cookie
-                    Cookies.set('uid', data.token);
-                    console.log('Token:', data.token);
-          
-                    // Redirect to the '/url' page
-                    window.location.href = '/url';}
+                    const storedToken = Cookies.get('uid');
+                    console.log('kkkkkkkk',storedToken);
+                    if (storedToken) {
+                      // Redirect to '/url' if the token exists
+                      console.log('mmmmmmm',storedToken);
+                      
+                      window.location.href = '/url';
+                      console.log('hhhhhhhh',storedToken);
+                    }
             } else {
                 setError(response.data.error);
             }

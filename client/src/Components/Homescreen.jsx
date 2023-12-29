@@ -13,36 +13,48 @@ const Homescreen = () => {
   const [analytics, setAnalytics] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Fetch shortened URL and redirect URL
-        const response = await fetch(`http://localhost:8001/${shortId}`);
-        if (response.ok) {
-          const data = await response.json();
-          setRedirectUrl(data.redirectURL);
-        } else {
-          setError('Failed to fetch redirect URL');
-          return;
-        }
-
-        // Fetch analytics data
-        const analyticsResponse = await fetch(`http://localhost:8001/url/analytics/${shortId}`);
-        if (analyticsResponse.ok) {
-          const analyticsData = await analyticsResponse.json();
-          setAnalytics(analyticsData);
-        } else {
-          setError('Failed to fetch analytics data');
-        }
-      } catch (error) {
-        setError(`Error: ${error.message}`);
-      }
-    };
-
+    // Check if there is a shortId in the URL, and fetch the redirect URL
     if (shortId) {
-      fetchData();
-    }
+      const fetchRedirectUrl = async () => {
+        try {
+          const response = await fetch(`http://localhost:8001/${shortId}`);
+          if (response.ok) {
+            const data = await response.json();
+            setRedirectUrl(data.redirectURL);
+          } else {
+            setError('Failed to fetch redirect URL');
+          }
+        } catch (error) {
+          setError(`Error: ${error.message}`);
+        }
+      };
+
+    
+    fetchRedirectUrl();
+  
+  }
   }, [shortId]);
 
+  async function getAnalytics(shortId) {
+    try {
+      const response = await fetch(`http://localhost:8001/url/analytics/${shortId}`);
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} - ${response.statusText}`);
+      }
+  
+      const data = await response.json();
+      console.log('Fetched analytics:', data);
+      return {
+        totalClicks: data.totalClicks,
+        analytics: data.analytics,
+      };
+    } catch (error) {
+      console.error('Error fetching analytics:', error.message);
+      throw error;
+    }
+  }
+  
+  
   const handleShorten = async () => {
     try {
       const response = await fetch('http://localhost:8001/url', {
@@ -62,6 +74,8 @@ const Homescreen = () => {
         if (redirectResponse.ok) {
           const redirectData = await redirectResponse.json();
           setRedirectUrl(redirectData.redirectURL);
+         console.log(redirectData);
+         console.log(setRedirectUrl);
         } else {
           setError('Failed to fetch redirected URL');
         }
@@ -104,21 +118,25 @@ const Homescreen = () => {
           </a>
         </p>
       )}
-      {redirectUrl && (
-        <p>
-          Redirect URL:{' '}
-          <a href={redirectUrl} target="_blank" rel="noopener noreferrer">
-            {redirectUrl}
-          </a>
-        </p>
-      )}
+      
 
-      {analytics && (
-        <div>
-          <p>Total Clicks: {analytics.totalClicks}</p>
-          <p>Analytics: {JSON.stringify(analytics.analytics)}</p>
-        </div>
-      )}
+      <Button variant="contained" style={{ top: 20, borderRadius: 20, backgroundColor: '#f79b3c', width: '170px' }} onClick={() => getAnalytics(shortenedId)}>
+  Analytics
+</Button>
+
+{analytics && (
+  <div>
+    <h1>Total Clicks: {analytics.totalClicks}</h1>
+    <ul>
+      {analytics.analytics.map((entry, index) => (
+        <li key={index}>
+          Timestamp: {entry.timestamp}, ID: {entry._id}
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
+
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>

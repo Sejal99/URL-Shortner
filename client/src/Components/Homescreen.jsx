@@ -29,19 +29,17 @@ const Homescreen = () => {
         }
       };
 
-    
-    fetchRedirectUrl();
-  
-  }
+      fetchRedirectUrl();
+    }
   }, [shortId]);
 
-  async function getAnalytics(shortId) {
+  async function getAnalyticsData(shortId) {
     try {
       const response = await fetch(`http://localhost:8001/url/analytics/${shortId}`);
       if (!response.ok) {
         throw new Error(`Error: ${response.status} - ${response.statusText}`);
       }
-  
+
       const data = await response.json();
       console.log('Fetched analytics:', data);
       return {
@@ -53,8 +51,7 @@ const Homescreen = () => {
       throw error;
     }
   }
-  
-  
+
   const handleShorten = async () => {
     try {
       const response = await fetch('http://localhost:8001/url', {
@@ -69,22 +66,35 @@ const Homescreen = () => {
         const data = await response.json();
         setShortenedId(data.id);
         setError(null);
-
-        const redirectResponse = await fetch(`http://localhost:8001/${data.id}`);
-        if (redirectResponse.ok) {
-          const redirectData = await redirectResponse.json();
-          setRedirectUrl(redirectData.redirectURL);
-         console.log(redirectData);
-         console.log(setRedirectUrl);
-        } else {
-          setError('Failed to fetch redirected URL');
-        }
       } else {
         const errorData = await response.json();
         setError(`Failed to shorten URL. Server Error: ${errorData.error}`);
       }
     } catch (error) {
       setError(`Error: ${error.message}`);
+    }
+  };
+
+  const handleRedirect = async () => {
+    try {
+      const response = await fetch(`http://localhost:8001/${shortenedId}`);
+      if (response.ok) {
+        const data = await response.json();
+        window.location.href = data.redirectURL;
+      } else {
+        setError('Failed to fetch redirect URL');
+      }
+    } catch (error) {
+      setError(`Error: ${error.message}`);
+    }
+  };
+
+  const handleAnalytics = async () => {
+    try {
+      const analyticsData = await getAnalyticsData(shortenedId);
+      setAnalytics(analyticsData);
+    } catch (error) {
+      setError(`Error fetching analytics: ${error.message}`);
     }
   };
 
@@ -113,30 +123,31 @@ const Homescreen = () => {
       {shortenedId && (
         <p style={{ marginTop: '40px' }}>
           Shortened URL:{' '}
-          <a href={`http://localhost:8001/${shortenedId}`} target="_blank" rel="noopener noreferrer">
+          <a  target="_blank" rel="noopener noreferrer" onClick={handleRedirect}
+          style={{ textDecoration: 'underline', cursor: 'pointer', color: 'blue' }}
+          >
+            
             http://localhost:8001/{shortenedId}
           </a>
         </p>
       )}
-      
 
-      <Button variant="contained" style={{ top: 20, borderRadius: 20, backgroundColor: '#f79b3c', width: '170px' }} onClick={() => getAnalytics(shortenedId)}>
-  Analytics
-</Button>
+      <Button variant="contained" style={{ top: 20, borderRadius: 20, backgroundColor: '#f79b3c', width: '170px' }} onClick={handleAnalytics}>
+        Analytics
+      </Button>
 
-{analytics && (
-  <div>
-    <h1>Total Clicks: {analytics.totalClicks}</h1>
-    <ul>
-      {analytics.analytics.map((entry, index) => (
-        <li key={index}>
-          Timestamp: {entry.timestamp}, ID: {entry._id}
-        </li>
-      ))}
-    </ul>
-  </div>
-)}
-
+      {analytics && (
+        <div>
+          <h1>Total Clicks: {analytics.totalClicks}</h1>
+          <ul>
+            {analytics.analytics.map((entry, index) => (
+              <li key={index}>
+                Timestamp: {entry.timestamp}, ID: {entry._id}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>

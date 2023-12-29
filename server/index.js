@@ -15,7 +15,10 @@ const PORT = 8001;
 connectToMongoDB("mongodb+srv://sejal8974:VmvJAh6Efa8nyVWy@cluster0.arbfpo8.mongodb.net/?retryWrites=true&w=majority").then(() =>
   console.log("Mongodb connected")
 );
-app.use(cors());
+app.use(cors({
+  origin:'http://localhost:5173',
+  credentials:true
+}));
 app.use(express.json());//middleware
 
 app.use("/url",urlRoute);   //only logged in user can access this

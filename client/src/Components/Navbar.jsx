@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -11,12 +12,32 @@ const Navbar = () => {
       </div>
 
       <div style={styles.buttonContainer}>
-        <button style={styles.navButton} onClick={() => navigate("/Signup")}>
-          Signup
-        </button>
-        <button style={styles.navButton} onClick={() => navigate("/Signin")}>
-          Signin
-        </button>
+        {
+          !Cookies.get('uid')
+          ?(
+            <>
+             <button style={styles.navButton} onClick={() => navigate("/Signup")}>
+            Signup
+          </button>
+          <button style={styles.navButton} onClick={() => navigate("/Signin")}>
+            Signin
+          </button>
+            </>
+           
+          ):(
+            <>
+              <button style={styles.navButton} onClick={() => {
+                Cookies.remove('uid')
+                navigate('/Signup')
+              }}>
+            Logout
+          </button>
+            </>
+          )
+
+        }
+        
+      
       </div>
     </div>
   );

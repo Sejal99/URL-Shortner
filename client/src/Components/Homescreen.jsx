@@ -107,7 +107,7 @@ const Homescreen = () => {
       height: '100vh',
       flexDirection: 'column',
       marginTop: '-70px',
-      position: 'relative',
+    //  position: 'relative',
     }}>
       <div
         style={{
@@ -122,7 +122,7 @@ const Homescreen = () => {
           opacity: 0.6, // Adjust the opacity value
           zIndex: -1, // Move the pseudo-element to the background
         }}/>
-      <h1 style={{ marginBottom: '-6px', color: '#713596' }}>Shorten your looooong URLs</h1>
+      <h1 style={{ marginBottom: '-6px', color: '#713596', marginTop: '-30px'}}>Shorten your looooong URLs</h1>
       <h1 style={{ marginTop: '0px', color: '#713596' }}>like never before!</h1>
 
       <TextField

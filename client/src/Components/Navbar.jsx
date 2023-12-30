@@ -28,7 +28,7 @@ const Navbar = () => {
             <>
               <button style={styles.navButton} onClick={() => {
                 Cookies.remove('uid')
-                navigate('/Signup')
+                navigate('/')
               }}>
             Logout
           </button>
@@ -48,8 +48,8 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     padding: "10px 20px",
-   // background: "#ffffff", // Change to your preferred background color
-//boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)", // Add a subtle box shadow
+   // background: "#e9e8eb", // Change to your preferred background color
+boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)", // Add a subtle box shadow
     backgroundImage: `url(${backgroundImage})`,
           backgroundSize: 'cover',
   },

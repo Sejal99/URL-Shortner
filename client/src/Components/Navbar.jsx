@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
+import backgroundImage from '../assets/pic.jpg';
 const Navbar = () => {
   const navigate = useNavigate();
 
@@ -48,15 +48,17 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     padding: "10px 20px",
-    background: "#ffffff", // Change to your preferred background color
-    boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)", // Add a subtle box shadow
+   // background: "#ffffff", // Change to your preferred background color
+//boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)", // Add a subtle box shadow
+    backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: 'cover',
   },
   logoContainer: {
     fontSize: 20,
   },
   logo: {
     margin: 0,
-    color: "#333333", // Change to your preferred text color
+    color: "#f79b3c", // Change to your preferred text color
   },
   buttonContainer: {
     display: "flex",

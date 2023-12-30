@@ -3,6 +3,7 @@ import { TextField, InputAdornment, Button } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
+import backgroundImage from '../assets/pic.jpg';
 
 const Homescreen = () => {
   const [url, setUrl] = useState('');
@@ -99,9 +100,30 @@ const Homescreen = () => {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column', marginTop: '-70px' }}>
-      <h1 style={{ marginBottom: '-3px', color: 'purple' }}>Shorten your looooong URLs</h1>
-      <h1 style={{ marginTop: '0px', color: 'purple' }}>like never before!</h1>
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100vh',
+      flexDirection: 'column',
+      marginTop: '-70px',
+      position: 'relative',
+    }}>
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          content: "''",
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: 'cover',
+          opacity: 0.6, // Adjust the opacity value
+          zIndex: -1, // Move the pseudo-element to the background
+        }}/>
+      <h1 style={{ marginBottom: '-6px', color: '#713596' }}>Shorten your looooong URLs</h1>
+      <h1 style={{ marginTop: '0px', color: '#713596' }}>like never before!</h1>
 
       <TextField
         style={{ width: '400px' }}
@@ -117,7 +139,7 @@ const Homescreen = () => {
         }}
         label="Enter your Url"
       />
-      <Button variant="contained" style={{ top: 20, borderRadius: 20, backgroundColor: '#f79b3c', width: '170px' }} onClick={handleShorten}>
+      <Button variant="contained" style={{ top: 20, borderRadius: 20, backgroundColor: '#713596', width: '170px' }} onClick={handleShorten}>
         Shorten
       </Button>
       {shortenedId && (
@@ -132,7 +154,7 @@ const Homescreen = () => {
         </p>
       )}
 
-      <Button variant="contained" style={{ top: 20, borderRadius: 20, backgroundColor: '#f79b3c', width: '170px' }} onClick={handleAnalytics}>
+      {/* <Button variant="contained" style={{ top: 20, borderRadius: 20, backgroundColor: '#f79b3c', width: '170px' }} onClick={handleAnalytics}>
         Analytics
       </Button>
 
@@ -147,7 +169,7 @@ const Homescreen = () => {
             ))}
           </ul>
         </div>
-      )}
+      )} */}
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>

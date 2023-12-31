@@ -1,5 +1,5 @@
 const jwt=require("jsonwebtoken");
-const secret="1234";
+
 
 
 //this func will make tokens
@@ -8,12 +8,12 @@ function setUser(user){
 return jwt.sign({
     _id:user._id,
     email:user.email,
-},secret);  
+},process.env.SECRET);  
 }
 
 function getUser(token){
     try {
-        return jwt.verify(token,secret);
+        return jwt.verify(token,process.env.SECRET);
     } catch (error) {
         if(!token) return null;
     }

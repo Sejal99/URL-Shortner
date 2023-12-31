@@ -4,17 +4,18 @@ const { restrictToLoggedinUserOnly, checkAuth } = require("./middlewares/auth");
 const path = require("path");
 const URL = require("./models/url");
 const cors = require('cors');
-
+const mongoose = require('mongoose');
 const urlRoute = require("./routes/url");
 const staticRoute = require("./routes/staticRouter");
 const userRoute = require("./routes/user");
-
+const dotenv=require("dotenv");
+dotenv.config()
 const app = express();
 const PORT = 8001;
 
-connectToMongoDB("mongodb+srv://sejal8974:VmvJAh6Efa8nyVWy@cluster0.arbfpo8.mongodb.net/?retryWrites=true&w=majority").then(() =>
-  console.log("Mongodb connected")
-);
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true,  })
+ .then(()=>console.log('database connected'))
+ .catch((err)=>console.log(err))
 app.use(cors({
   origin:'http://localhost:5173',
   credentials:true

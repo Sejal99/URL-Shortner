@@ -106,7 +106,7 @@ const Homescreen = () => {
       alignItems: 'center',
       height: '100vh',
       flexDirection: 'column',
-      marginTop: '-70px',
+    //  marginTop: '-70px',
     //  position: 'relative',
     }}>
       <div

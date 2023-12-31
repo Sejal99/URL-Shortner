@@ -122,8 +122,8 @@ const Homescreen = () => {
           opacity: 0.6, // Adjust the opacity value
           zIndex: -1, // Move the pseudo-element to the background
         }}/>
-      <h1 style={{ marginBottom: '-6px', color: '#713596', marginTop: '-30px'}}>Shorten your looooong URLs</h1>
-      <h1 style={{ marginTop: '0px', color: '#713596' }}>like never before!</h1>
+      <h1 style={{ marginBottom: '-6px', color: '#1d2e4a', marginTop: '-30px'}}>Shorten your looooong URLs</h1>
+      <h1 style={{ marginTop: '0px', color: '#1d2e4a' }}>like never before!</h1>
 
       <TextField
         style={{ width: '400px' }}
@@ -139,7 +139,7 @@ const Homescreen = () => {
         }}
         label="Enter your Url"
       />
-      <Button variant="contained" style={{ top: 20, borderRadius: 20, backgroundColor: '#713596', width: '170px' }} onClick={handleShorten}>
+      <Button variant="contained" style={{ top: 20, borderRadius: 20, backgroundColor: '#1d2e4a', width: '170px' }} onClick={handleShorten}>
         Shorten
       </Button>
       {shortenedId && (

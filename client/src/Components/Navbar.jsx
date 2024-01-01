@@ -16,7 +16,7 @@ const Navbar = () => {
           !Cookies.get('uid')
           ?(
             <>
-             <button style={styles.navButton} onClick={() => navigate("/Signup")}>
+             <button style={styles.navButton} onClick={() => navigate("/")}>
             Signup
           </button>
           <button style={styles.navButton} onClick={() => navigate("/Signin")}>

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Button, TextField, Card, Typography } from '@mui/material';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -15,7 +14,7 @@ const Signup = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: email, // Pass email and password in the request body
+          email: email,
           password: password,
         }),
       });
@@ -37,49 +36,45 @@ const Signup = () => {
     <div>
       <div
         style={{
-          paddingTop: 150,
-          marginBottom: 10,
-          display: 'flex',
-          justifyContent: 'center',
+          paddingTop: '150px',
+          marginBottom: '10px',
+          textAlign: 'center',
+          fontSize:35
         }}
       >
-        <Typography variant={'h6'}>
-          Welcome to SnipIt. Sign up below
-        </Typography>
+        <h6>Welcome to SnipIt. Sign up below</h6>
       </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Card variant={'outlined'} style={{ width: 400, padding: 20 }}>
-          <TextField
-            onChange={(event) => {
-              setEmail(event.target.value);
-            }}
-            fullWidth={true}
-            label="Email"
-            variant="outlined"
+        <div style={{ width: '400px', padding: '20px', border: '1px solid #ccc', borderRadius: '5px' }}>
+          <input
+            type="text"
+            onChange={(event) => setEmail(event.target.value)}
+            placeholder="Email"
+            style={{ width: '95%', padding: '10px', marginBottom: '20px' }}
           />
-          <br />
-          <br />
-          <TextField
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-            fullWidth={true}
-            label="Password"
-            variant="outlined"
-            type={'password'}
+          <input
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            style={{ width: '95%', padding: '10px', marginBottom: '20px' }}
           />
-          <br />
-          <br />
-
-          <Button
-            size={'large'}
-            variant="contained"
-            style={{ backgroundColor: '#f79b3c' }}
-            onClick={handleSignup} // Call handleSignup when the button is clicked
+          <button
+            style={{
+              width: '30%',
+              padding: '15px',
+              borderRadius: '5px',
+              backgroundColor: '#f79b3c',
+              border: 'none',
+              color: 'white',
+              cursor: 'pointer',
+              
+             
+            }}
+            onClick={handleSignup}
           >
             Signup
-          </Button>
-        </Card>
+          </button>
+        </div>
       </div>
     </div>
   );

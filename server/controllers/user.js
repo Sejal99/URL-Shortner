@@ -9,22 +9,24 @@ async function handleUserSignup(req, res) {
   
     try {
       // Create user
-      const newUser = await User.create({
+    //   const newUser = await User.create({
        
-        email,
-        password,
-      });
-    // console.log("llllllll",newUser);
-      // Instead of redirecting, send a JSON response with the newly created user data
-      return res.status(201).json({
-        message: "User created successfully",
-        user: {
-          id: newUser._id,
-          name: newUser.name,
-          email: newUser.email,
-        },
-      });
-    } catch (error) {
+    //     email,
+    //     password,
+    //   });
+    // // console.log("llllllll",newUser);
+    //   // Instead of redirecting, send a JSON response with the newly created user data
+    //   return res.status(201).json({
+    //     message: "User created successfully",
+    //     user: {
+    //       id: newUser._id,
+    //       name: newUser.name,
+    //       email: newUser.email,
+    //     },
+    //   });
+    res.json('user bsjaskjD');
+    }
+     catch (error) {
    //   console.error(error);
   
       // If there's an error, send a JSON response with an error message

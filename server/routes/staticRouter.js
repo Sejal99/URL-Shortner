@@ -3,19 +3,19 @@ const URL = require("../models/url");
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-    if (!req.user) {
-      return res.status(401).json({ error: "Unauthorized", message: "User not logged in" });
-    }
+// router.get("/", async (req, res) => {
+//     if (!req.user) {
+//       return res.status(401).json({ error: "Unauthorized", message: "User not logged in" });
+//     }
   
-    try {
-      const allUrls = await URL.find({ createdBy: req.user._id });
-      return res.json({ urls: allUrls });
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json({ error: "Internal server error" });
-    }
-  });
+//     try {
+//       const allUrls = await URL.find({ createdBy: req.user._id });
+//       return res.json({ urls: allUrls });
+//     } catch (error) {
+//       console.error(error);
+//       return res.status(500).json({ error: "Internal server error" });
+//     }
+//   });
   
 
 router.get("/signup", (req, res) => {

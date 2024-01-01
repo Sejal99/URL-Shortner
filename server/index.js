@@ -11,13 +11,13 @@ const userRoute = require("./routes/user");
 const dotenv=require("dotenv");
 dotenv.config()
 const app = express();
-const PORT = 8001;
+
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true,  })
  .then(()=>console.log('database connected'))
  .catch((err)=>console.log(err))
 app.use(cors({
-  origin:'http://localhost:5173',
+  origin:'https://url-shortner-87nh.vercel.app',
   credentials:true
 }));
 app.use(express.json());//middleware
@@ -25,7 +25,9 @@ app.use(express.json());//middleware
 app.use("/url",urlRoute);  
 app.use("/user", userRoute);
 app.use("/", checkAuth, staticRoute)
-
+app.get("/",async (req,res)=>{
+  res.send("server connected successfully");
+})
 //paste the short id here
 app.get("/:shortId", async (req, res) => {
   const shortId = req.params.shortId; // Given by the user
@@ -57,6 +59,6 @@ app.get("/:shortId", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => console.log(`Server Started at PORT:${PORT}`));
+app.listen(process.env.PORT, () => console.log(`Server Started at PORT:${process.env.PORT}`));
 
 //VmvJAh6Efa8nyVWy

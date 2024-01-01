@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, InputAdornment, Button } from '@mui/material';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLink } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
 import backgroundImage from '../assets/pic.jpg';
 
@@ -11,10 +8,8 @@ const Homescreen = () => {
   const [error, setError] = useState(null);
   const { shortId } = useParams();
   const [redirectUrl, setRedirectUrl] = useState('');
-  const [analytics, setAnalytics] = useState(null);
 
   useEffect(() => {
-    // Check if there is a shortId in the URL, and fetch the redirect URL
     if (shortId) {
       const fetchRedirectUrl = async () => {
         try {
@@ -93,7 +88,7 @@ const Homescreen = () => {
   const handleAnalytics = async () => {
     try {
       const analyticsData = await getAnalyticsData(shortenedId);
-      setAnalytics(analyticsData);
+      console.log(analyticsData);
     } catch (error) {
       setError(`Error fetching analytics: ${error.message}`);
     }
@@ -106,8 +101,6 @@ const Homescreen = () => {
       alignItems: 'center',
       height: '100vh',
       flexDirection: 'column',
-    //  marginTop: '-70px',
-    //  position: 'relative',
     }}>
       <div
         style={{
@@ -119,57 +112,49 @@ const Homescreen = () => {
           content: "''",
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: 'cover',
-          opacity: 0.6, // Adjust the opacity value
-          zIndex: -1, // Move the pseudo-element to the background
-        }}/>
-      <h1 style={{ marginBottom: '-6px', color: '#1d2e4a', marginTop: '-30px'}}>Shorten your looooong URLs</h1>
-      <h1 style={{ marginTop: '0px', color: '#1d2e4a' }}>like never before!</h1>
-
-      <TextField
-        style={{ width: '400px' }}
-        variant="outlined"
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <FontAwesomeIcon icon={faLink} style={{ marginRight: '8px' }} />
-            </InputAdornment>
-          ),
+          opacity: 0.6,
+          zIndex: -1,
         }}
-        label="Enter your Url"
       />
-      <Button variant="contained" style={{ top: 20, borderRadius: 20, backgroundColor: '#1d2e4a', width: '170px' }} onClick={handleShorten}>
-        Shorten
-      </Button>
+      <h1 style={{ marginBottom: '-6px', color: '#674099', marginTop: '-30px'}}>Shorten your looooong URLs</h1>
+      <h1 style={{ marginTop: '0px', color: '#674099' }}>like never before!</h1>
+
+      <input
+  type="text"
+  style={{ width: '400px', padding: '15px', borderRadius: '35px', border: 'none', margin: '0', outline: 'none', marginBottom: '20px' }}
+  value={url}
+  onChange={(e) => setUrl(e.target.value)}
+  placeholder="Enter your Url"
+/>
+<button
+  style={{ padding: '10px', borderRadius: '20px', backgroundColor: '#9b74cf', width:'150px', border: 'none', margin: '0', outline: 'none' }}
+  onClick={handleShorten}
+>
+  Shorten
+</button>
+
+
+
       {shortenedId && (
         <p style={{ marginTop: '40px' }}>
           Shortened URL:{' '}
-          <a  target="_blank" rel="noopener noreferrer" onClick={handleRedirect}
-          style={{ textDecoration: 'underline', cursor: 'pointer', color: 'blue' }}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={handleRedirect}
+            style={{ textDecoration: 'underline', cursor: 'pointer', color: 'blue' }}
           >
-            
             http://localhost:8001/{shortenedId}
           </a>
         </p>
       )}
 
-      {/* <Button variant="contained" style={{ top: 20, borderRadius: 20, backgroundColor: '#f79b3c', width: '170px' }} onClick={handleAnalytics}>
+      {/* <button
+        style={{ margin: '10px', padding: '10px', borderRadius: '20px', backgroundColor: '#1d2e4a', color: 'white' }}
+        onClick={handleAnalytics}
+      >
         Analytics
-      </Button>
-
-      {analytics && (
-        <div>
-          <h1>Total Clicks: {analytics.totalClicks}</h1>
-          <ul>
-            {analytics.analytics.map((entry, index) => (
-              <li key={index}>
-                Timestamp: {entry.timestamp}, ID: {entry._id}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )} */}
+      </button> */}
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>

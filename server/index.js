@@ -9,14 +9,14 @@ const urlRoute = require("./routes/url");
 const staticRoute = require("./routes/staticRouter");
 const userRoute = require("./routes/user");
 const dotenv=require("dotenv");
-const connectDb = require("./connect");
+//const connectDb = require("./connect");
 dotenv.config()
 const app = express();
-connectDb();
-
-// mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true,  })
-//  .then(()=>console.log('database connected'))
-//  .catch((err)=>console.log(err))
+//connectDb();
+mongoose.set('strictQuery', false);
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true, dbName: "url" })
+ .then(()=>console.log('database connected'))
+ .catch((err)=>console.log(err))
 
 // app.use(cors({
 //   origin:'https://url-shortner-87nh.vercel.app',

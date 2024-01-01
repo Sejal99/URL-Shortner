@@ -14,7 +14,7 @@ async function handleUserSignup(req, res) {
         email,
         password,
       });
-     console.log("llllllll",newUser);
+    // console.log("llllllll",newUser);
       // Instead of redirecting, send a JSON response with the newly created user data
       return res.status(201).json({
         message: "User created successfully",
@@ -25,7 +25,7 @@ async function handleUserSignup(req, res) {
         },
       });
     } catch (error) {
-      console.error(error);
+   //   console.error(error);
   
       // If there's an error, send a JSON response with an error message
       return res.status(500).json({ error: "Internal server error" });
@@ -46,7 +46,7 @@ async function handleUserLogin(req, res) {
     
     const token=setUser(user);
     res.cookie("uid",token);
-console.log('ooooooooooo',token);
+//console.log('ooooooooooo',token);
   return res.status(200).json({
     message: "Login successful",
     user: {

@@ -9,17 +9,26 @@ const urlRoute = require("./routes/url");
 const staticRoute = require("./routes/staticRouter");
 const userRoute = require("./routes/user");
 const dotenv=require("dotenv");
+const connectDb = require("./connect");
 dotenv.config()
 const app = express();
+connectDb();
 
+// mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true,  })
+//  .then(()=>console.log('database connected'))
+//  .catch((err)=>console.log(err))
 
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true,  })
- .then(()=>console.log('database connected'))
- .catch((err)=>console.log(err))
-app.use(cors({
-  origin:'https://url-shortner-87nh.vercel.app',
-  credentials:true
-}));
+// app.use(cors({
+//   origin:'https://url-shortner-87nh.vercel.app',
+//   credentials:true
+// }));
+const corsConfig = {
+  origin: 'https://url-shortner-87nh.vercel.app',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
+}
+app.use(cors(corsConfig))
+//app.options("", cors(corsConfig))
 app.use(express.json());//middleware
 
 app.use("/url",urlRoute);  

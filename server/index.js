@@ -22,7 +22,7 @@ app.use(cors({
 }));
 app.use(express.json());//middleware
 
-app.use("/url",urlRoute);   //only logged in user can access this
+app.use("/url",urlRoute);  
 app.use("/user", userRoute);
 app.use("/", checkAuth, staticRoute)
 

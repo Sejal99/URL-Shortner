@@ -33,7 +33,7 @@ app.use(express.json());//middleware
 
 app.use("/url",urlRoute);  
 app.use("/user", userRoute);
-app.use("/", checkAuth, staticRoute)
+
 
 //paste the short id here
 app.get("/:shortId", async (req, res) => {
@@ -70,6 +70,7 @@ app.get("/", (req, res)=>{
   res.json('Server is Live');
 })
 
-app.listen(process.env.PORT, () => console.log(`Server Started at PORT:${process.env.PORT}`));
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log('Server running on port ' +  port));
 
 //VmvJAh6Efa8nyVWy

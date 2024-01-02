@@ -34,9 +34,7 @@ app.use(express.json());//middleware
 app.use("/url",urlRoute);  
 app.use("/user", userRoute);
 app.use("/", checkAuth, staticRoute)
-app.get("/",async (req,res)=>{
-  res.send("server connected successfully");
-})
+
 //paste the short id here
 app.get("/:shortId", async (req, res) => {
   const shortId = req.params.shortId; // Given by the user
@@ -67,6 +65,10 @@ app.get("/:shortId", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
+app.get("/", (req, res)=>{
+  res.json('Server is Live');
+})
 
 app.listen(process.env.PORT, () => console.log(`Server Started at PORT:${process.env.PORT}`));
 

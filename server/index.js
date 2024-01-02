@@ -14,7 +14,7 @@ dotenv.config()
 const app = express();
 //connectDb();
 mongoose.set('strictQuery', false);
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true, dbName: "url" })
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true, dbName: "urls" })
  .then(()=>console.log('database connected'))
  .catch((err)=>console.log(err))
 

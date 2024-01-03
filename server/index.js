@@ -18,12 +18,11 @@ mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   dbName: "urls",
-  autoReconnect: true, // Enable automatic reconnection
-  reconnectTries: Number.MAX_VALUE, // Number of reconnect attempts
-  reconnectInterval: 1000, // Time between reconnect attempts in milliseconds
+  serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds if server selection takes too long
 })
-.then(() => console.log('Database connected'))
-.catch((err) => console.error('Error connecting to database:', err));
+  .then(() => console.log('Database connected'))
+  .catch((err) => console.error('Error connecting to database:', err));
+
 
 
 // app.use(cors({

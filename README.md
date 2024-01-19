@@ -1,5 +1,8 @@
 # React + Vite
 
+Introducing our URL shortener built with React.js, Node.js, Express, and MongoDB! Simplify long URLs into concise links effortlessly. With a user-friendly interface, seamless integration, and robust backend support, this application ensures efficient and reliable URL shortening for a streamlined web experience. Try it now and make sharing links easier than ever!
+
+
 ![Screenshot (9)](https://github.com/Sejal99/url_shortner/assets/85271912/576e194e-0141-49a0-ac2f-bd7c8a20966e)
 
 

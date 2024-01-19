@@ -8,7 +8,7 @@ const Signup = () => {
 
   const handleSignup = async () => {
     try {
-      const response = await fetch('http://localhost:8001/user', {
+      const response = await fetch('https://url-shortner-46dr.vercel.app/user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

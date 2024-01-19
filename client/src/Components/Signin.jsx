@@ -11,7 +11,7 @@ const Signin = () => {
 
     const handleLogin = async () => {
         try {
-            const response = await fetch('http://localhost:8001/user/login', {
+            const response = await fetch('https://url-shortner-46dr.vercel.app/user/login', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {

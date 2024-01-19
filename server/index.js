@@ -31,14 +31,13 @@ mongoose.connect(process.env.MONGO_URI, {
 // }));
 const corsConfig = {
   allowedOrigins: 'https://url-shortner-one-ruddy.vercel.app',
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE']
+ 
 }
 app.use(cors(corsConfig))
 //app.options("", cors(corsConfig))
 app.use(express.json());//middleware
 
-app.use("/url",cors(corsConfig), urlRoute);
+app.use("/url", urlRoute);
 app.use("/user", userRoute);
 
 

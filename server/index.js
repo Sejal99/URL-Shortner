@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const urlRoute = require("./routes/url");
 const staticRoute = require("./routes/staticRouter");
 const userRoute = require("./routes/user");
-import cookieParser from 'cookie-parser';
+const cookieParser = require ('cookie-parser');
 const dotenv=require("dotenv");
 //const connectDb = require("./connect");
 dotenv.config()

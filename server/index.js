@@ -29,11 +29,14 @@ mongoose.connect(process.env.MONGO_URI, {
 //   origin:'https://url-shortner-87nh.vercel.app',
 //   credentials:true
 // }));
-const corsConfig = {
-  allowedOrigins: 'https://url-shortner-one-ruddy.vercel.app',
+// const corsConfig = {
+//   allowedOrigins: 'https://url-shortner-one-ruddy.vercel.app',
  
-}
-app.use(cors(corsConfig))
+// }
+app.use(cors({
+  origin:'https://url-shortner-one-ruddy.vercel.app',
+  credentials:true
+}))
 //app.options("", cors(corsConfig))
 app.use(express.json());//middleware
 

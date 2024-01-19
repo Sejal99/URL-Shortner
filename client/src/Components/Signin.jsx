@@ -33,9 +33,9 @@ const Signin = () => {
             const token = Cookies.get('uid');
             console.log(token);
 
-            
+            if (token) {
                 navigate('/url');
-            
+            }
         } catch (error) {
             console.error('Error:', error.message);
         }

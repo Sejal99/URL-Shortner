@@ -38,7 +38,7 @@ app.use(cors(corsConfig))
 //app.options("", cors(corsConfig))
 app.use(express.json());//middleware
 
-app.use("/url",urlRoute);  
+app.use("/url",cors(corsConfig), urlRoute);
 app.use("/user", userRoute);
 
 

@@ -1,83 +1,83 @@
-// import React, { useState } from 'react';
+import React, { useState } from 'react';
 
-// const Signup = () => {
-//   const [email, setEmail] = useState('');
-//   console.log(email);
-//   const [password, setPassword] = useState('');
-//   console.log(password);
+const Signup = () => {
+  const [email, setEmail] = useState('');
+  console.log(email);
+  const [password, setPassword] = useState('');
+  console.log(password);
 
-//   const handleSignup = async () => {
-//     try {
-//       const response = await fetch('http://localhost:8001/user', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//           email: email,
-//           password: password,
-//         }),
-//       });
+  const handleSignup = async () => {
+    try {
+      const response = await fetch('http://localhost:8001/user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
 
-//       if (response.ok) {
-//         const data = await response.json();
-//         console.log('User created successfully:', data.user);
-//         window.location.href = '/signin';
-//       } else {
-//         const errorData = await response.json();
-//         console.error('Error creating user:', errorData.error);
-//       }
-//     } catch (error) {
-//       console.error('Error:', error.message);
-//     }
-//   };
+      if (response.ok) {
+        const data = await response.json();
+        console.log('User created successfully:', data.user);
+        window.location.href = '/signin';
+      } else {
+        const errorData = await response.json();
+        console.error('Error creating user:', errorData.error);
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  };
 
-//   return (
-//     <div>
-//       <div
-//         style={{
-//           paddingTop: '150px',
-//           marginBottom: '10px',
-//           textAlign: 'center',
-//           fontSize:35
-//         }}
-//       >
-//         <h6>Welcome to SnipIt. Sign up below</h6>
-//       </div>
-//       <div style={{ display: 'flex', justifyContent: 'center' }}>
-//         <div style={{ width: '400px', padding: '20px', border: '1px solid #ccc', borderRadius: '5px' }}>
-//           <input
-//             type="text"
-//             onChange={(event) => setEmail(event.target.value)}
-//             placeholder="Email"
-//             style={{ width: '95%', padding: '10px', marginBottom: '20px' }}
-//           />
-//           <input
-//             type="password"
-//             onChange={(e) => setPassword(e.target.value)}
-//             placeholder="Password"
-//             style={{ width: '95%', padding: '10px', marginBottom: '20px' }}
-//           />
-//           <button
-//             style={{
-//               width: '30%',
-//               padding: '15px',
-//               borderRadius: '5px',
-//               backgroundColor: '#f79b3c',
-//               border: 'none',
-//               color: 'white',
-//               cursor: 'pointer',
+  return (
+    <div>
+      <div
+        style={{
+          paddingTop: '150px',
+          marginBottom: '10px',
+          textAlign: 'center',
+          fontSize:35
+        }}
+      >
+        <h6>Welcome to SnipIt. Sign up below</h6>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div style={{ width: '400px', padding: '20px', border: '1px solid #ccc', borderRadius: '5px' }}>
+          <input
+            type="text"
+            onChange={(event) => setEmail(event.target.value)}
+            placeholder="Email"
+            style={{ width: '95%', padding: '10px', marginBottom: '20px' }}
+          />
+          <input
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            style={{ width: '95%', padding: '10px', marginBottom: '20px' }}
+          />
+          <button
+            style={{
+              width: '30%',
+              padding: '15px',
+              borderRadius: '5px',
+              backgroundColor: '#f79b3c',
+              border: 'none',
+              color: 'white',
+              cursor: 'pointer',
               
              
-//             }}
-//             onClick={handleSignup}
-//           >
-//             Signup
-//           </button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
+            }}
+            onClick={handleSignup}
+          >
+            Signup
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-// export default Signup;
+export default Signup;

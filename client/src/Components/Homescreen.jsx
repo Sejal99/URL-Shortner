@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import backgroundImage from '../assets/pic.jpg';
 
 const Homescreen = () => {
@@ -8,7 +8,7 @@ const Homescreen = () => {
   const [error, setError] = useState(null);
   const { shortId } = useParams();
   const [redirectUrl, setRedirectUrl] = useState('');
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (shortId) {
       const fetchRedirectUrl = async () => {
@@ -77,6 +77,7 @@ const Homescreen = () => {
       if (response.ok) {
         const data = await response.json();
         window.location.href = data.redirectURL;
+        
       } else {
         setError('Failed to fetch redirect URL');
       }

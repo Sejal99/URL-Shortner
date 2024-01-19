@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
   console.log(email);
   const [password, setPassword] = useState('');
   console.log(password);
-
+  const navigate = useNavigate();
   const handleSignup = async () => {
     try {
       const response = await fetch('https://url-shortner-46dr.vercel.app/user', {
@@ -22,7 +23,7 @@ const Signup = () => {
       if (response.ok) {
         const data = await response.json();
         console.log('User created successfully:', data.user);
-        window.location.href = '/signin';
+        navigate('/signin')
       } else {
         const errorData = await response.json();
         console.error('Error creating user:', errorData.error);

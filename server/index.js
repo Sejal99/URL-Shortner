@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const urlRoute = require("./routes/url");
 const staticRoute = require("./routes/staticRouter");
 const userRoute = require("./routes/user");
+import cookieParser from 'cookie-parser';
 const dotenv=require("dotenv");
 //const connectDb = require("./connect");
 dotenv.config()
@@ -39,7 +40,7 @@ app.use(cors({
 }))
 //app.options("", cors(corsConfig))
 app.use(express.json());//middleware
-
+app.use(cookieParser());
 app.use("/url", urlRoute);
 app.use("/user", userRoute);
 

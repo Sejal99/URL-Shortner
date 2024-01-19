@@ -13,7 +13,7 @@ const Homescreen = () => {
     if (shortId) {
       const fetchRedirectUrl = async () => {
         try {
-          const response = await fetch(`https://url-shortner-46dr.vercel.app/${shortId}`);
+          const response = await fetch(`https://url-shortner-one-ruddy.vercel.app/${shortId}`);
           if (response.ok) {
             const data = await response.json();
             setRedirectUrl(data.redirectURL);
@@ -50,7 +50,7 @@ const Homescreen = () => {
 
   const handleShorten = async () => {
     try {
-      const response = await fetch('https://url-shortner-46dr.vercel.app/url', {
+      const response = await fetch('https://url-shortner-one-ruddy.vercel.app/url', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ const Homescreen = () => {
 
   const handleRedirect = async () => {
     try {
-      const response = await fetch(`https://url-shortner-46dr.vercel.app/${shortenedId}`);
+      const response = await fetch(`https://url-shortner-one-ruddy.vercel.app/${shortenedId}`);
       if (response.ok) {
         const data = await response.json();
         window.location.href = data.redirectURL;
@@ -144,7 +144,7 @@ const Homescreen = () => {
             onClick={handleRedirect}
             style={{ textDecoration: 'underline', cursor: 'pointer', color: 'blue' }}
           >
-            https://url-shortner-46dr.vercel.app/{shortenedId}
+            https://url-shortner-one-ruddy.vercel.app/{shortenedId}
           </a>
         </p>
       )}

@@ -30,7 +30,7 @@ mongoose.connect(process.env.MONGO_URI, {
 //   credentials:true
 // }));
 const corsConfig = {
-  origin: 'https://url-shortner-zy7z.vercel.app/',
+  origin: 'https://url-shortner-one-ruddy.vercel.app/',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE']
 }

@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
   console.log(email);
   const [password, setPassword] = useState('');
   console.log(password);
-  const navigate = useNavigate();
+
   const handleSignup = async () => {
     try {
-      const response = await fetch('https://url-shortner-46dr.vercel.app/user', {
+      const response = await fetch('http://localhost:8001/user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -23,7 +22,7 @@ const Signup = () => {
       if (response.ok) {
         const data = await response.json();
         console.log('User created successfully:', data.user);
-        navigate('/signin')
+        window.location.href = '/signin';
       } else {
         const errorData = await response.json();
         console.error('Error creating user:', errorData.error);
@@ -34,13 +33,13 @@ const Signup = () => {
   };
 
   return (
-    <div>
+    <div >
       <div
         style={{
-          paddingTop: '150px',
-          marginBottom: '10px',
+          paddingTop: '100px',
+          marginBottom: '5px',
           textAlign: 'center',
-          fontSize:35
+          fontSize:35,  
         }}
       >
         <h6>Welcome to SnipIt. Sign up below</h6>

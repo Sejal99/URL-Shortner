@@ -35,7 +35,7 @@ mongoose.connect(process.env.MONGO_URI, {
  
 // }
 app.use(cors({
-  origin:'https://url-shortner-one-ruddy.vercel.app',
+  origin:'http://localhost:5173',
   credentials:true
 }))
 //app.options("", cors(corsConfig))

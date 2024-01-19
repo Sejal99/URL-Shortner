@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import backgroundImage from '../assets/pic.jpg';
 
 const Homescreen = () => {
@@ -8,12 +8,12 @@ const Homescreen = () => {
   const [error, setError] = useState(null);
   const { shortId } = useParams();
   const [redirectUrl, setRedirectUrl] = useState('');
-  const navigate = useNavigate();
+
   useEffect(() => {
     if (shortId) {
       const fetchRedirectUrl = async () => {
         try {
-          const response = await fetch(`https://url-shortner-46dr.vercel.app/${shortId}`);
+          const response = await fetch(`http://localhost:8001/${shortId}`);
           if (response.ok) {
             const data = await response.json();
             setRedirectUrl(data.redirectURL);
@@ -50,7 +50,7 @@ const Homescreen = () => {
 
   const handleShorten = async () => {
     try {
-      const response = await fetch('https://url-shortner-46dr.vercel.app/url', {
+      const response = await fetch('http://localhost:8001/url', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -73,11 +73,10 @@ const Homescreen = () => {
 
   const handleRedirect = async () => {
     try {
-      const response = await fetch(`https://url-shortner-46dr.vercel.app/${shortenedId}`);
+      const response = await fetch(`http://localhost:8001/${shortenedId}`);
       if (response.ok) {
         const data = await response.json();
         window.location.href = data.redirectURL;
-        
       } else {
         setError('Failed to fetch redirect URL');
       }
@@ -145,7 +144,7 @@ const Homescreen = () => {
             onClick={handleRedirect}
             style={{ textDecoration: 'underline', cursor: 'pointer', color: 'blue' }}
           >
-            https://url-shortner-46dr.vercel.app/{shortenedId}
+            http://localhost:8001/{shortenedId}
           </a>
         </p>
       )}

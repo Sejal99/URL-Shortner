@@ -8,10 +8,10 @@ const Signin = () => {
     console.log(email);
     const [password, setPassword] = useState('');
     console.log(password);
-  
+
     const handleLogin = async () => {
         try {
-            const response = await fetch('https://url-shortner-46dr.vercel.app/user/login', {
+            const response = await fetch('http://localhost:8001/user/login', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
@@ -34,7 +34,7 @@ const Signin = () => {
             console.log(token);
 
             if (token) {
-                navigate('/url');
+                navigate('/home');
             }
         } catch (error) {
             console.error('Error:', error.message);

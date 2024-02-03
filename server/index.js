@@ -10,6 +10,7 @@ const staticRoute = require("./routes/staticRouter");
 const userRoute = require("./routes/user");
 const cookieParser = require ('cookie-parser');
 const dotenv=require("dotenv");
+const shortid = require("shortid");
 //const connectDb = require("./connect");
 dotenv.config()
 const app = express();
@@ -19,7 +20,7 @@ mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   dbName: "urls",
-  serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds if server selection takes too long
+ 
 })
   .then(() => console.log('Database connected'))
   .catch((err) => console.error('Error connecting to database:', err));
@@ -38,47 +39,77 @@ app.use(cors({
   origin:'http://localhost:5173',
   credentials:true
 }))
+
+
+
 //app.options("", cors(corsConfig))
 app.use(express.json());//middleware
-app.use(cookieParser());
 app.use("/url", urlRoute);
 app.use("/user", userRoute);
+app.get('/:id', async(req,res)=> {
+  try{
+    const tinyUrl = req.params.id;
+  console.log(tinyUrl);
+  const validUrl= await URL.findOne({shortId:tinyUrl})
+  
+    if(validUrl){
+      const urlDoc = await URL.updateOne(
+        { shortId: tinyUrl },
+        { $push: { visitHistory: { timestamp: Date.now() } } }
+
+      );
+       res.set('Cache-Control', 'no-cache');
+       res.redirect(validUrl.redirectURL)
+    }
+  
+  }catch(err){
+    // console.log(err);
+    res.status(403).json({message:err})
+  }
+  
+})
+
+
 
 
 //paste the short id here
-app.get("/:shortId", async (req, res) => {
-  const shortId = req.params.shortId; // Given by the user
-  try {
-    const entry = await URL.findOneAndUpdate(
-      {
-        shortId,
-      },
-      {
-        $push: {
-          visitHistory: {
-            timestamp: Date.now(),
-          },
-        },
-      }
-    );
-
-    if (entry) {
-      // If an entry is found, send a JSON response with the redirect URL
-      res.json({ redirectURL: entry.redirectURL });
-    } else {
-      // If no entry is found, send a JSON response indicating that the shortId is not valid
-      res.status(404).json({ error: "ShortId not found" });
-    }
-  } catch (error) {
-    // Handle any potential errors
-    console.error(error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
+// app.get("/:shortId", async (req, res) => {
+//   const shortId = req.params.shortId; // Given by the user
+//   console.log('short is',shortId);
+//   try {
+//     res.redirect()
+//   } catch (error) {
+//     // Handle any potential errors
+//     console.error(error);
+//     res.status(500).json({ error: "Internal server error" });
+//   }
+// });
 
 app.get("/", (req, res)=>{
   res.json('Server is Live');
 })
+
+// app.get('/:id', async(req,res)=> {
+//   try{
+//     const tinyUrl = req.params.id;
+//   console.log(tinyUrl);
+//   const validUrl= await URL.findOne({shortId:tinyUrl})
+  
+//     if(validUrl){
+//       const urlDoc = await URL.updateOne(
+//         { shortId: tinyUrl },
+//         { $push: { visitHistory: { timestamp: Date.now() } } }
+//       );
+//        res.set('Cache-Control', 'no-cache');
+//        res.redirect(validUrl.redirectUrl)
+//     }
+  
+//   }catch(err){
+//     // console.log(err);
+//     res.status(403).json({message:err})
+//   }
+  
+// })
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log('Server running on port ' +  port));

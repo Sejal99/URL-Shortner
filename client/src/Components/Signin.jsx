@@ -16,6 +16,7 @@ const Signin = () => {
                 credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
+
                 },
                 body: JSON.stringify({
                     email: email,
@@ -30,10 +31,10 @@ const Signin = () => {
             const data = await response.json();
             console.log('llllllll', data);
 
-            const token = Cookies.get('uid');
-            console.log(token);
+          
+           localStorage.setItem('token',data)
 
-            if (token) {
+            if (localStorage.getItem("token")) {
                 navigate('/home');
             }
         } catch (error) {

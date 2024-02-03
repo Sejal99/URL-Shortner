@@ -46,18 +46,8 @@ async function handleUserLogin(req, res) {
     });
     
     const token=setUser(user);
-    res.cookie("uid",token);
-//console.log('ooooooooooo',token);
-  return res.status(200).json({
-    message: "Login successful",
-    user: {
-      id: user._id,
-      name: user.name,
-      email: user.email,
-    },
-  });
+    res.json(token);
 
-  
 }
 
 module.exports = {

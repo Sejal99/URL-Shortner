@@ -13,7 +13,7 @@ const Navbar = () => {
 
       <div style={styles.buttonContainer}>
         {
-          !Cookies.get('uid')
+          !localStorage.getItem('token')
           ?(
             <>
              <button style={styles.navButton} onClick={() => navigate("/signup")}>
@@ -27,7 +27,7 @@ const Navbar = () => {
           ):(
             <>
               <button style={styles.navButton} onClick={() => {
-                Cookies.remove('uid')
+              localStorage.clear()
                 navigate('/')
               }}>
             Logout

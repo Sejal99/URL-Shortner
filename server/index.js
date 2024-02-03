@@ -27,7 +27,7 @@ mongoose.connect(process.env.MONGO_URI, {
 
 app.use(cors({
   origin:'https://url-shortner-one-ruddy.vercel.app',
- 
+ credentials:true
 }))
 
 

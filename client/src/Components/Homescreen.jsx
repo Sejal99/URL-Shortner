@@ -157,31 +157,6 @@ const Homescreen = () => {
 </div>
 
 
-      {/* {shortenedId && (
-        <p style={{ marginTop: "40px" }}>
-          Shortened URL:{" "}
-          <a
-            target="_blank"
-           href={`http://localhost:8001/${shortenedId}`}
-         
-           // onClick={handleRedirect}
-            style={{
-              textDecoration: "underline",
-              cursor: "pointer",
-              color: "blue",
-            }}
-          >
-            http://localhost:8001/{shortenedId}
-          </a>
-        </p>
-      )} */}
-
-      {/* <button
-        style={{ margin: '10px', padding: '10px', borderRadius: '20px', backgroundColor: '#1d2e4a', color: 'white' }}
-        onClick={handleAnalytics}
-      >
-        Analytics
-      </button> */}
 
       {error && <p style={{ color: "red" }}>{error}</p>}
     </div>

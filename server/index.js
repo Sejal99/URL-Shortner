@@ -25,19 +25,9 @@ mongoose.connect(process.env.MONGO_URI, {
   .then(() => console.log('Database connected'))
   .catch((err) => console.error('Error connecting to database:', err));
 
-
-
-// app.use(cors({
-//   origin:'https://url-shortner-87nh.vercel.app',
-//   credentials:true
-// }));
-// const corsConfig = {
-//   allowedOrigins: 'https://url-shortner-one-ruddy.vercel.app',
- 
-// }
 app.use(cors({
   origin:'https://url-shortner-one-ruddy.vercel.app',
-  credentials:true
+ 
 }))
 
 
@@ -72,44 +62,12 @@ app.get('/:id', async(req,res)=> {
 
 
 
-//paste the short id here
-// app.get("/:shortId", async (req, res) => {
-//   const shortId = req.params.shortId; // Given by the user
-//   console.log('short is',shortId);
-//   try {
-//     res.redirect()
-//   } catch (error) {
-//     // Handle any potential errors
-//     console.error(error);
-//     res.status(500).json({ error: "Internal server error" });
-//   }
-// });
 
 app.get("/", (req, res)=>{
   res.json('Server is Live');
 })
 
-// app.get('/:id', async(req,res)=> {
-//   try{
-//     const tinyUrl = req.params.id;
-//   console.log(tinyUrl);
-//   const validUrl= await URL.findOne({shortId:tinyUrl})
-  
-//     if(validUrl){
-//       const urlDoc = await URL.updateOne(
-//         { shortId: tinyUrl },
-//         { $push: { visitHistory: { timestamp: Date.now() } } }
-//       );
-//        res.set('Cache-Control', 'no-cache');
-//        res.redirect(validUrl.redirectUrl)
-//     }
-  
-//   }catch(err){
-//     // console.log(err);
-//     res.status(403).json({message:err})
-//   }
-  
-// })
+
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log('Server running on port ' +  port));

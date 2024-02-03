@@ -1,9 +1,9 @@
 import React from "react";
 import imageUrl from "../assets/images.png";
-import backgroundImage from '../assets/pic.jpg';
+import backgroundImage from "../assets/pic.jpg";
 import { useNavigate } from "react-router-dom";
 const Home = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <div
       style={{
@@ -13,7 +13,7 @@ const Home = () => {
         alignItems: "center",
         height: "100vh",
         backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: 'cover',
+        backgroundSize: "cover",
       }}
     >
       <div
@@ -31,27 +31,45 @@ const Home = () => {
           shortener."
         </h1>
 
-        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: 20 }}>
-          <button style={{ marginRight: 10, background: "#f79b3c", 
-    color: "#ffffff", 
-    border: "none",
-    cursor: "pointer",
-    padding: "10px 15px",
-    borderRadius: 5,
-    fontSize: 14, }} onClick={() => navigate("/signup")}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            marginTop: 20,
+          }}
+        >
+          <button
+            style={{
+              marginRight: 10,
+              background: "#f79b3c",
+              color: "#ffffff",
+              border: "none",
+              cursor: "pointer",
+              padding: "10px 15px",
+              borderRadius: 5,
+              fontSize: 14,
+            }}
+            onClick={() => navigate("/signup")}
+          >
             Signup
           </button>
-          <button style={{ marginRight: 10, background: "#f79b3c", 
-    color: "#ffffff", 
-    border: "none",
-    cursor: "pointer",
-    padding: "10px 15px",
-    borderRadius: 5,
-    fontSize: 14, }} onClick={() => navigate("/Signin")}>
+          <button
+            style={{
+              marginRight: 10,
+              background: "#f79b3c",
+              color: "#ffffff",
+              border: "none",
+              cursor: "pointer",
+              padding: "10px 15px",
+              borderRadius: 5,
+              fontSize: 14,
+            }}
+            onClick={() => navigate("/Signin")}
+          >
             Signin
           </button>
         </div>
-   
       </div>
 
       <div

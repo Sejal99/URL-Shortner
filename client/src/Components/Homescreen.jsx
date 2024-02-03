@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import backgroundImage from "../assets/pic.jpg";
+import { BASE_URL } from "../../config";
 
 const Homescreen = () => {
   const [url, setUrl] = useState("");
@@ -21,7 +22,7 @@ const Homescreen = () => {
           "Content-Type": "application/json",
         };
         console.log("headers", headers);
-        const res = await fetch("http://localhost:8001/url", {
+        const res = await fetch(`${BASE_URL}/url`, {
           headers: headers,
         });
         console.log("iiiir", res);
@@ -38,30 +39,10 @@ const Homescreen = () => {
     fetchData();
   }, []);
 
-  async function getAnalyticsData(shortId) {
-    try {
-      const response = await fetch(
-        `http://localhost:8001/url/analytics/${shortId}`
-      );
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status} - ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      console.log("Fetched analytics:", data);
-      return {
-        totalClicks: data.totalClicks,
-        analytics: data.analytics,
-      };
-    } catch (error) {
-      console.error("Error fetching analytics:", error.message);
-      throw error;
-    }
-  }
 
   const handleShorten = async () => {
     try {
-      const response = await fetch("http://localhost:8001/url", {
+      const response = await fetch(`${BASE_URL}/url`, {
         method: "POST",
         headers: {
           authorization: localStorage.getItem("token"),
@@ -83,28 +64,8 @@ const Homescreen = () => {
     }
   };
 
-  const handleRedirect = async () => {
-    try {
-      const response = await fetch(`http://localhost:8001/${shortenedId}`);
-      if (response.ok) {
-        const data = await response.json();
-        window.location.href = data.redirectURL;
-      } else {
-        setError("Failed to fetch redirect URL");
-      }
-    } catch (error) {
-      setError(`Error: ${error.message}`);
-    }
-  };
 
-  const handleAnalytics = async () => {
-    try {
-      const analyticsData = await getAnalyticsData(shortenedId);
-      console.log(analyticsData);
-    } catch (error) {
-      setError(`Error fetching analytics: ${error.message}`);
-    }
-  };
+
 
   return (
     <div
@@ -180,10 +141,10 @@ const Homescreen = () => {
           <td style={{ border: "1px solid black", padding: "8px" }}>
             <a
               target="_blank"
-              href={`http://localhost:8001/${val.shortId}`}
+              href={`${BASE_URL}/${val.shortId}`}
               style={{ textDecoration: "underline", cursor: "pointer", color: "blue" }}
             >
-              http://localhost:8001/{val.shortId}
+             ${BASE_URL}/{val.shortId}
             </a>
           </td>
           <td style={{ border: "1px solid black", padding: "8px" }}>

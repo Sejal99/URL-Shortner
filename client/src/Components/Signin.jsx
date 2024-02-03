@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import { BASE_URL } from '../../config';
 
 const Signin = () => {
     const navigate = useNavigate();
@@ -11,7 +12,7 @@ const Signin = () => {
 
     const handleLogin = async () => {
         try {
-            const response = await fetch('http://localhost:8001/user/login', {
+            const response = await fetch(`${BASE_URL}/user/login`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {

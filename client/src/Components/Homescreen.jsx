@@ -10,6 +10,7 @@ const Homescreen = () => {
   const { shortId } = useParams();
   const [redirectUrl, setRedirectUrl] = useState("");
   const [data, setData] = useState([]);
+  const [getDisable, setDisable] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,11 +38,11 @@ const Homescreen = () => {
       }
     };
     fetchData();
-  }, []);
-
+  }, [getDisable]);
 
   const handleShorten = async () => {
     try {
+      setDisable(true)
       const response = await fetch(`${BASE_URL}/url`, {
         method: "POST",
         headers: {
@@ -53,6 +54,7 @@ const Homescreen = () => {
 
       if (response.ok) {
         const data = await response.json();
+        setDisable(false)
         setShortenedId(data.id);
         setError(null);
       } else {
@@ -60,12 +62,10 @@ const Homescreen = () => {
         setError(`Failed to shorten URL. Server Error: ${errorData.error}`);
       }
     } catch (error) {
+      setDisable(false)
       setError(`Error: ${error.message}`);
     }
   };
-
-
-
 
   return (
     <div
@@ -128,35 +128,41 @@ const Homescreen = () => {
         Shorten
       </button>
       <div style={{ marginTop: "20px" }}>
-  <table style={{ borderCollapse: "collapse", width: "100%" }}>
-    <thead>
-      <tr>
-        <th style={{ border: "1px solid black", padding: "8px" }}>Shortened URL</th>
-        <th style={{ border: "1px solid black", padding: "8px" }}>View Count</th>
-      </tr>
-    </thead>
-    <tbody>
-      {data.map((val, index) => (
-        <tr key={index}>
-          <td style={{ border: "1px solid black", padding: "8px" }}>
-            <a
-              target="_blank"
-              href={`${BASE_URL}/${val.shortId}`}
-              style={{ textDecoration: "underline", cursor: "pointer", color: "blue" }}
-            >
-             ${BASE_URL}/{val.shortId}
-            </a>
-          </td>
-          <td style={{ border: "1px solid black", padding: "8px" }}>
-            {val.visitHistory.length}
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</div>
-
-
+        <table style={{ borderCollapse: "collapse", width: "100%" }}>
+          <thead>
+            <tr>
+              <th style={{ border: "1px solid black", padding: "8px" }}>
+                Shortened URL
+              </th>
+              <th style={{ border: "1px solid black", padding: "8px" }}>
+                View Count
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((val, index) => (
+              <tr key={index}>
+                <td style={{ border: "1px solid black", padding: "8px" }}>
+                  <a
+                    target="_blank"
+                    href={`${BASE_URL}/${val.shortId}`}
+                    style={{
+                      textDecoration: "underline",
+                      cursor: "pointer",
+                      color: "blue",
+                    }}
+                  >
+                    ${BASE_URL}/{val.shortId}
+                  </a>
+                </td>
+                <td style={{ border: "1px solid black", padding: "8px" }}>
+                  {val.visitHistory.length}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
     </div>

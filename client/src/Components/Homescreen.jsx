@@ -11,6 +11,7 @@ const Homescreen = () => {
   const [redirectUrl, setRedirectUrl] = useState("");
   const [data, setData] = useState([]);
   const [getDisable, setDisable] = useState(false);
+const [toggle,setToggle]=useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,7 +39,7 @@ const Homescreen = () => {
       }
     };
     fetchData();
-  }, [getDisable]);
+  }, [getDisable || toggle]);
 
   const handleShorten = async () => {
     try {
@@ -146,10 +147,12 @@ const Homescreen = () => {
                   <a
                     target="_blank"
                     href={`${BASE_URL}/${val.shortId}`}
+                    onClick={()=>setToggle(!toggle)}
                     style={{
                       textDecoration: "underline",
                       cursor: "pointer",
                       color: "blue",
+                      
                     }}
                   >
                     ${BASE_URL}/{val.shortId}

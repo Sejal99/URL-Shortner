@@ -10,7 +10,7 @@ export const postUrlData = async (req: Request, res: Response)=> {
       const { redirectUrl }: { redirectUrl: string } = req.body;
       const shortId: string = nanoid(7);
   
-    const data=  await urlModel.create({ shortId, redirectUrl , createdBy: userId});
+    const data=  await urlModel.create({ shortId, redirectUrl});
     data.save()
 
       res.sendStatus(200);
@@ -48,7 +48,7 @@ export const postUrlData = async (req: Request, res: Response)=> {
   
   export const getUrls = async (req:Request, res:Response) => {
     try{      
-        const urls= await urlModel.find({createdBy: req.headers["userId"]})
+        const urls= await urlModel.find()
         res.json(urls)
     }catch(err){
       res.status(404).json(err)

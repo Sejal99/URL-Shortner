@@ -1,7 +1,7 @@
 import express from 'express'
 import { userModel } from '../models/user'
 import jwt from 'jsonwebtoken'
-import { vertifyJwt } from '../middleware/verifyJwt'
+
 const router= express.Router()
 const secret= 'secret'
 

@@ -13,7 +13,8 @@ import { urlModel } from './models/url';
 
 
  app.use(cors({
-     origin: 'https://dikshak-url-shortner.vercel.app', 
+    //  origin: 'https://dikshak-url-shortner.vercel.app', 
+    origin: 'http://localhost:3000', 
      credentials: true, 
    })); 
 

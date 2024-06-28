@@ -17,11 +17,11 @@ const urlSchema= new mongoose.Schema({
             required:true
         }
     }],
-    createdBy:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"users",
-        required:true
-    }
+    // createdBy:{
+    //     type:mongoose.Schema.Types.ObjectId,
+    //     ref:"users",
+    //     required:true
+    // }
 }, { timestamps:true})
 
 export const urlModel = mongoose.model('url', urlSchema)

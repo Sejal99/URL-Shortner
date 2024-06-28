@@ -1,20 +1,19 @@
 import express from 'express'
 import {  deleteUrl, getAllUrls, getAnalytics,  getUrls,  postUrlData, redirectToUrl } from '../controllers/urlController'
-import { vertifyJwt } from '../middleware/verifyJwt'
-import restrictTo from '../middleware/authorization'
+
 
 const router= express.Router()
 
-router.post('/', vertifyJwt, postUrlData)
+router.post('/',  postUrlData)
 
-router.get('/:id', vertifyJwt, redirectToUrl)
+router.get('/:id',  redirectToUrl)
 
-router.get('/analytics/:id', vertifyJwt, getAnalytics)
+router.get('/analytics/:id', getAnalytics)
 
-router.post('/getAllUrls', vertifyJwt, restrictTo(['NORMAL','ADMIN']) , getUrls)
+router.post('/getAllUrls', getUrls)
 
-router.post('/admin/urls', vertifyJwt, restrictTo(['ADMIN']), getAllUrls)
+router.post('/admin/urls',getAllUrls)
 
-router.delete('/remove/:id', vertifyJwt , deleteUrl )
+router.delete('/remove/:id',  deleteUrl )
 
 export default router

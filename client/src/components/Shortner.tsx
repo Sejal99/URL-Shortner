@@ -16,10 +16,10 @@ const Shortner= () => {
         
         const fun= async ()=> {
            
-            const token= localStorage.getItem('token')
+            // const token= localStorage.getItem('token')
          
             const headers = {
-                'authorization': token,
+                // 'authorization': token,
                 'Content-Type': 'application/json' 
               };
             const res= await fetch(`${BASE_URL}/url/getAllUrls`, {
@@ -48,7 +48,7 @@ const Shortner= () => {
                  //@ts-ignore
                 headers:{
                    
-                    "authorization":localStorage.getItem('token'),
+                    // "authorization":localStorage.getItem('token'),
                     "Content-Type":"application/json"
                 },
                 body:JSON.stringify({redirectUrl:url})
@@ -77,7 +77,7 @@ const Shortner= () => {
                 method:"DELETE",
                 //@ts-ignore
                 headers:{
-                    'authorization':token,
+                    // 'authorization':token,
                     'Content-Type':"application/json"
                 }
             })

@@ -1,2 +1,2 @@
-export const BASE_URL= 'https://shorturl-yw7l.onrender.com'
+export const BASE_URL= 'https://url-shortner-46dr.vercel.app'
 // export const BASE_URL= 'http://localhost:8001'

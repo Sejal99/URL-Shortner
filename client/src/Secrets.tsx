@@ -1,0 +1,1 @@
+export const BASE_URL= 'https://shorturl-yw7l.onrender.com'

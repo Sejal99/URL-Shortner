@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllUrls = exports.getUrls = exports.getAnalytics = exports.redirectToUrl = exports.postUrlData = void 0;
+exports.deleteUrl = exports.getAllUrls = exports.getUrls = exports.getAnalytics = exports.redirectToUrl = exports.postUrlData = void 0;
 var express_1 = __importDefault(require("express"));
 var url_1 = require("../models/url");
 var nanoid_1 = require("nanoid");
@@ -53,7 +53,7 @@ var postUrlData = function (req, res) { return __awaiter(void 0, void 0, void 0,
                 userId = req.headers['userId'];
                 redirectUrl = req.body.redirectUrl;
                 shortId = (0, nanoid_1.nanoid)(7);
-                return [4 /*yield*/, url_1.urlModel.create({ shortId: shortId, redirectUrl: redirectUrl, createdBy: userId })];
+                return [4 /*yield*/, url_1.urlModel.create({ shortId: shortId, redirectUrl: redirectUrl })];
             case 1:
                 data = _a.sent();
                 data.save();
@@ -125,7 +125,7 @@ var getUrls = function (req, res) { return __awaiter(void 0, void 0, void 0, fun
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, url_1.urlModel.find({ createdBy: req.headers["userId"] })];
+                return [4 /*yield*/, url_1.urlModel.find()];
             case 1:
                 urls = _a.sent();
                 res.json(urls);
@@ -159,3 +159,23 @@ var getAllUrls = function (req, res) { return __awaiter(void 0, void 0, void 0, 
     });
 }); };
 exports.getAllUrls = getAllUrls;
+var deleteUrl = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var urls, err_6;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, url_1.urlModel.deleteOne({ _id: req.params.id })];
+            case 1:
+                urls = _a.sent();
+                res.json("Removed Successfully");
+                return [3 /*break*/, 3];
+            case 2:
+                err_6 = _a.sent();
+                res.status(404).json(err_6);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+exports.deleteUrl = deleteUrl;

@@ -75,7 +75,6 @@ router.post('/signin', function (req, res) { return __awaiter(void 0, void 0, vo
                 return [4 /*yield*/, user_1.userModel.matchPassword(email, password)];
             case 1:
                 user = _b.sent();
-                console.log(user);
                 if (!user) {
                     return [2 /*return*/, res.status(400).json('User does not exist!')];
                 }
@@ -83,7 +82,6 @@ router.post('/signin', function (req, res) { return __awaiter(void 0, void 0, vo
                     return [2 /*return*/, res.sendStatus(403)];
                 }
                 token = jsonwebtoken_1.default.sign({ id: user._id, role: user.role }, process.env.SECRET_KEY, { expiresIn: "1h" });
-                console.log(token);
                 res.status(200).json(token);
                 return [3 /*break*/, 3];
             case 2:

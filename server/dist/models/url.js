@@ -22,10 +22,10 @@ var urlSchema = new mongoose_1.default.Schema({
                 required: true
             }
         }],
-    createdBy: {
-        type: mongoose_1.default.Schema.Types.ObjectId,
-        ref: "users",
-        required: true
-    }
+    // createdBy:{
+    //     type:mongoose.Schema.Types.ObjectId,
+    //     ref:"users",
+    //     required:true
+    // }
 }, { timestamps: true });
 exports.urlModel = mongoose_1.default.model('url', urlSchema);

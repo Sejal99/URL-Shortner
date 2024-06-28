@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Dikshak | URL Shortner",
+  title: "Sejal | URL Shortner",
   description: "Advanced URL Shortner",
 };
 
